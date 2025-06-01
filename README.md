@@ -23,7 +23,7 @@ A modern React web application built with Vite, TypeScript, and Tailwind CSS.
    npm run dev
    ```
 
-   This will start the development server on `http://localhost:3000` with hot reload enabled.
+   This will start the development server on `http://localhost:3002` with hot reload enabled.
 
 3. **Alternative development commands:**
    ```bash

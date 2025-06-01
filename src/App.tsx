@@ -97,11 +97,11 @@ function App() {
     switch (activeSection) {
       case "home":
         return (
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-8 golden-gradient">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 md:mb-8 golden-gradient">
               Future of War is Robotics
             </h1>
-            <p className="text-xl mb-8">
+            <p className="text-lg md:text-xl mb-6 md:mb-8">
               TactView provides cutting-edge solutions for unmanned ground
               vehicles and unmanned aerial vehicles, making the forward line of
               robotics more efficient than ever before.
@@ -111,7 +111,7 @@ function App() {
               autoPlay
               loop
               muted
-              className="rounded-lg shadow-2xl w-[1200px] max-w-full cursor-pointer"
+              className="rounded-lg shadow-2xl w-full max-w-[1200px] cursor-pointer"
               onClick={() => handleVideoClick("/assets/main.mp4")}
             />
           </div>
@@ -121,24 +121,26 @@ function App() {
         if (selectedProduct && products[selectedProduct]) {
           const product = products[selectedProduct];
           return (
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto px-4">
               <div className="product-card">
-                <h2 className="text-3xl font-bold mb-6 golden-gradient">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 golden-gradient">
                   {product.title}
                 </h2>
 
-                <p className="text-xl mb-6">{product.description}</p>
+                <p className="text-lg md:text-xl mb-4 md:mb-6">
+                  {product.description}
+                </p>
 
-                <div className="mb-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-tactview-gold">
+                <div className="mb-6 md:mb-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-tactview-gold">
                     Overview
                   </h3>
-                  <p className="text-lg">{product.details}</p>
+                  <p className="text-base md:text-lg">{product.details}</p>
                 </div>
 
                 {product.demo && (
                   <div>
-                    <h3 className="text-2xl font-semibold mb-4 text-tactview-gold">
+                    <h3 className="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-tactview-gold">
                       Demo
                     </h3>
                     <video
@@ -146,7 +148,7 @@ function App() {
                       autoPlay
                       loop
                       muted
-                      className="rounded-lg w-[1200px] max-w-full cursor-pointer"
+                      className="rounded-lg w-full max-w-[1200px] cursor-pointer"
                       onClick={() => handleVideoClick(product.demo!)}
                     />
                   </div>
@@ -157,17 +159,19 @@ function App() {
         }
 
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto px-4">
             {Object.entries(products).map(([key, product]) => (
               <button
                 key={key}
                 className="product-card text-left hover:scale-105 transition-transform duration-300"
                 onClick={() => setSelectedProduct(key as ProductKey)}
               >
-                <h3 className="text-2xl font-bold mb-4 golden-gradient">
+                <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 golden-gradient">
                   {product.title}
                 </h3>
-                <p className="mb-4">{product.description}</p>
+                <p className="mb-3 md:mb-4 text-sm md:text-base">
+                  {product.description}
+                </p>
                 {product.demo && (
                   <video
                     src={product.demo}
@@ -188,17 +192,17 @@ function App() {
 
       case "contact":
         return (
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 golden-gradient">
+          <div className="max-w-2xl mx-auto text-center px-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 golden-gradient">
               Get in Touch
             </h2>
             <div className="product-card">
-              <Mail className="w-12 h-12 text-tactview-gold mx-auto mb-4" />
-              <p className="text-lg mb-6">
+              <Mail className="w-10 h-10 md:w-12 md:h-12 text-tactview-gold mx-auto mb-4" />
+              <p className="text-base md:text-lg mb-4 md:mb-6">
                 Interested in TactView products and solutions? We'd love to
                 discuss how we can help advance your robotics capabilities.
               </p>
-              <p className="text-xl font-semibold golden-gradient">
+              <p className="text-lg md:text-xl font-semibold golden-gradient break-all">
                 tactview-defense@gmail.com
               </p>
             </div>
@@ -212,14 +216,14 @@ function App() {
 
   return (
     <div className="min-h-screen bg-tactview-dark relative">
-      <div className="flex justify-center p-8">
-        <img src="/tactview.png" alt="TactView Logo" className="h-40" />
+      <div className="flex justify-center p-4 md:p-8">
+        <img src="/tactview.png" alt="TactView Logo" className="h-24 md:h-40" />
       </div>
 
-      <div className="flex flex-col items-center mt-20 mb-12">
-        <div className="flex items-center space-x-24">
+      <div className="flex flex-col items-center mt-8 md:mt-20 mb-8 md:mb-12">
+        <div className="flex items-center space-x-4 md:space-x-24">
           <button
-            className={`nav-item ${
+            className={`nav-item text-sm md:text-base ${
               activeSection === "home" ? "text-tactview-gold" : ""
             }`}
             onClick={() => {
@@ -232,7 +236,7 @@ function App() {
 
           <div className="relative">
             <button
-              className={`nav-item flex items-center ${
+              className={`nav-item flex items-center text-sm md:text-base ${
                 activeSection === "products" || isProductsOpen
                   ? "text-tactview-gold"
                   : ""
@@ -240,15 +244,15 @@ function App() {
               onClick={() => setIsProductsOpen(!isProductsOpen)}
             >
               Products
-              <ChevronDown className="ml-1 w-4 h-4" />
+              <ChevronDown className="ml-1 w-3 h-3 md:w-4 md:h-4" />
             </button>
 
             {isProductsOpen && (
-              <div className="absolute top-full mt-2 w-48 bg-tactview-dark rounded-lg shadow-xl border border-tactview-gold py-2 z-50">
+              <div className="absolute top-full mt-2 w-40 md:w-48 bg-tactview-dark rounded-lg shadow-xl border border-tactview-gold py-2 z-50 left-1/2 transform -translate-x-1/2">
                 {Object.entries(products).map(([key, product]) => (
                   <button
                     key={key}
-                    className="w-full text-left px-4 py-2 hover:text-tactview-gold transition-colors duration-200"
+                    className="w-full text-left px-3 md:px-4 py-2 hover:text-tactview-gold transition-colors duration-200 text-sm md:text-base"
                     onClick={() => {
                       setActiveSection("products");
                       setSelectedProduct(key as ProductKey);
@@ -263,7 +267,7 @@ function App() {
           </div>
 
           <button
-            className={`nav-item ${
+            className={`nav-item text-sm md:text-base ${
               activeSection === "contact" ? "text-tactview-gold" : ""
             }`}
             onClick={() => {
@@ -276,19 +280,21 @@ function App() {
         </div>
       </div>
 
-      <main className="container mx-auto px-4">{renderContent()}</main>
+      <main className="container mx-auto px-2 md:px-4 pb-8">
+        {renderContent()}
+      </main>
 
       {expandedVideo && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
           onClick={closeExpandedVideo}
         >
-          <div className="relative w-[90vw] h-[90vh] flex items-center justify-center">
+          <div className="relative w-full h-full max-w-[95vw] max-h-[95vh] flex items-center justify-center">
             <button
               onClick={closeExpandedVideo}
-              className="absolute top-4 right-4 text-white hover:text-tactview-gold z-10"
+              className="absolute top-2 right-2 md:top-4 md:right-4 text-white hover:text-tactview-gold z-10"
             >
-              <X className="w-8 h-8" />
+              <X className="w-6 h-6 md:w-8 md:h-8" />
             </button>
             <video
               src={expandedVideo}
