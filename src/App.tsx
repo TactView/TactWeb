@@ -87,7 +87,7 @@ function App() {
   return (
     <div className="min-h-screen bg-tactview-dark relative">
       <div className="p-4">
-        <img src="/logo_transparent.png" alt="TactView Logo" className="h-12" />
+        <img src="/tactview.png" alt="TactView Logo" className="h-12" />
       </div>
 
       <div className="flex flex-col items-center mt-8 mb-12">
@@ -140,7 +140,7 @@ function App() {
       </main>
 
       <div className="absolute bottom-4 right-4">
-        <img src="/tactview.png" alt="TactView" className="h-8" />
+        <img src="/logo_transparent.png" alt="TactView" className="h-8" />
       </div>
     </div>
   );
