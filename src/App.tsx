@@ -127,7 +127,7 @@ function App() {
         <img src="/tactview.png" alt="TactView Logo" className="h-48" />
       </div>
 
-      <div className="flex flex-col items-center mt-8 mb-12">
+      <div className="flex flex-col items-center mt-4 mb-12">
         <div className="flex items-center space-x-8">
           <button
             className={`nav-item ${activeSection === 'home' ? 'text-tactview-gold' : ''}`}
