@@ -234,9 +234,6 @@ function App() {
 
       <main className="container mx-auto px-4 py-12">{renderContent()}</main>
 
-      <div className="absolute bottom-4 right-4">
-        <img src="/logo_transparent.png" alt="TactView" className="h-32" />
-      </div>
     </div>
   );
 }
