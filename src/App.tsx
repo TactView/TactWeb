@@ -169,7 +169,7 @@ function App() {
   return (
     <div className="min-h-screen bg-tactview-dark relative">
       <div className="flex justify-center p-4">
-        <img src="/tactview.png" alt="TactView Logo" className="h-20" />
+        <img src="/tactview.png" alt="TactView Logo" className="h-40" />
       </div>
 
       <div className="flex flex-col items-center mt-4 mb-12">
