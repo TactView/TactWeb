@@ -11,7 +11,7 @@ body {
 }
 
 .golden-gradient {
-  background: linear-gradient(45deg, #B8860B, #DAA520);
+  background: linear-gradient(45deg, #8B6914, #B8860B);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -26,5 +26,5 @@ body {
 }
 
 .product-card {
-  @apply bg-[#1E1E1E] p-6 rounded-lg border border-[#333333] hover:border-tactview-gold transition-all duration-300;
+  @apply bg-[#1E1E1E] p-6 rounded-lg hover:bg-[#252525] transition-all duration-300;
 }

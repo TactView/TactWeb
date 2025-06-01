@@ -88,12 +88,9 @@ function App() {
           return (
             <div className="max-w-4xl mx-auto">
               <div className="product-card">
-                <div className="flex items-center mb-6">
-                  <div className="w-10 h-10">{product.icon}</div>
-                  <h2 className="text-3xl font-bold ml-4 golden-gradient">
-                    {product.title}
-                  </h2>
-                </div>
+                <h2 className="text-3xl font-bold mb-6 golden-gradient">
+                  {product.title}
+                </h2>
 
                 <p className="text-xl mb-6">{product.description}</p>
 
@@ -129,12 +126,9 @@ function App() {
                 className="product-card text-left hover:scale-105 transition-transform duration-300"
                 onClick={() => setSelectedProduct(key as ProductKey)}
               >
-                <div className="flex items-center mb-4">
-                  {product.icon}
-                  <h3 className="text-2xl font-bold ml-4 golden-gradient">
-                    {product.title}
-                  </h3>
-                </div>
+                <h3 className="text-2xl font-bold mb-4 golden-gradient">
+                  {product.title}
+                </h3>
                 <p className="mb-4">{product.description}</p>
                 {product.demo && (
                   <img
@@ -206,7 +200,7 @@ function App() {
             </button>
 
             {isProductsOpen && (
-              <div className="absolute top-full mt-2 w-48 bg-tactview-dark rounded-lg shadow-xl border border-tactview-gold py-2">
+              <div className="absolute top-full mt-2 w-48 bg-tactview-dark rounded-lg shadow-xl border border-tactview-gold py-2 z-50">
                 {Object.entries(products).map(([key, product]) => (
                   <button
                     key={key}
