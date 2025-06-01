@@ -4,10 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
+    "dev:open": "vite --host --open",
     "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "serve": "vite preview",
+    "serve:open": "vite preview --open",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
