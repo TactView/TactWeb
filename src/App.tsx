@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronDown,
   Bone as Drone,
@@ -24,6 +24,27 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState<ProductKey | "">("");
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [expandedVideo, setExpandedVideo] = useState<string | null>(null);
+
+  useEffect(() => {
+    const prefetchVideos = () => {
+      const videosToPreload = [
+        "/assets/execute.mp4",
+        "/assets/integrate.mp4",
+        "/assets/sim.mp4",
+      ];
+
+      videosToPreload.forEach((videoSrc) => {
+        const video = document.createElement("video");
+        video.preload = "auto";
+        video.src = videoSrc;
+        video.style.display = "none";
+        document.body.appendChild(video);
+      });
+    };
+
+    const timer = setTimeout(prefetchVideos, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const products: Record<ProductKey, Product> = {
     tactview: {
