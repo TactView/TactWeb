@@ -57,7 +57,7 @@ function App() {
             <div className="max-w-4xl mx-auto">
               <div className="product-card">
                 <div className="flex items-center mb-6">
-                  {product.icon}
+                  <div className="w-10 h-10">{product.icon}</div>
                   <h2 className="text-3xl font-bold ml-4 golden-gradient">{product.title}</h2>
                 </div>
                 
