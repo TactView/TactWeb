@@ -123,8 +123,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-tactview-dark relative">
-      <div className="p-4">
-        <img src="/tactview.png" alt="TactView Logo" className="h-12" />
+      <div className="flex justify-center p-4">
+        <img src="/tactview.png" alt="TactView Logo" className="h-48" />
       </div>
 
       <div className="flex flex-col items-center mt-8 mb-12">
@@ -141,12 +141,8 @@ function App() {
           
           <div className="relative">
             <button
-              className={`nav-item flex items-center ${activeSection === 'products' ? 'text-tactview-gold' : ''}`}
-              onClick={() => {
-                setActiveSection('products');
-                setSelectedProduct('');
-                setIsProductsOpen(!isProductsOpen);
-              }}
+              className={`nav-item flex items-center ${(activeSection === 'products' || isProductsOpen) ? 'text-tactview-gold' : ''}`}
+              onClick={() => setIsProductsOpen(!isProductsOpen)}
             >
               Products
               <ChevronDown className="ml-1 w-4 h-4" />
@@ -159,6 +155,7 @@ function App() {
                     key={key}
                     className="w-full text-left px-4 py-2 hover:text-tactview-gold transition-colors duration-200"
                     onClick={() => {
+                      setActiveSection('products');
                       setSelectedProduct(key);
                       setIsProductsOpen(false);
                     }}
@@ -187,7 +184,7 @@ function App() {
       </main>
 
       <div className="absolute bottom-4 right-4">
-        <img src="/logo_transparent.png" alt="TactView" className="h-8" />
+        <img src="/logo_transparent.png" alt="TactView" className="h-32" />
       </div>
     </div>
   );
