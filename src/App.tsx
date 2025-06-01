@@ -6,6 +6,7 @@ import {
   Target,
   Box,
   Mail,
+  X,
 } from "lucide-react";
 
 type ProductKey = "tactview" | "tactexecute" | "tactintegrate" | "tactsim";
@@ -22,6 +23,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState<ProductKey | "">("");
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [expandedVideo, setExpandedVideo] = useState<string | null>(null);
 
   const products: Record<ProductKey, Product> = {
     tactview: {
@@ -29,7 +31,7 @@ function App() {
       description:
         "Tactical control of UAVs and UGVs. Integration with vehicles, their autonomy, BMSs and operator controls.",
       icon: <Drone className="w-12 h-12 text-tactview-gold" />,
-      demo: "https://placehold.co/600x400.gif",
+      demo: "/assets/main.mp4",
       details:
         "TactView provides seamless integration between unmanned vehicles and battlefield management systems, enabling efficient tactical control and coordination of multiple autonomous units in real-time combat scenarios.",
     },
@@ -38,7 +40,7 @@ function App() {
       description:
         "Mission autonomy execution package. Converting BMS and operator input to tasks for each vehicle using advanced AI algorithms.",
       icon: <Target className="w-12 h-12 text-tactview-gold" />,
-      demo: "https://placehold.co/600x400.gif",
+      demo: "/assets/execute.mp4",
       details:
         "TactExecute leverages cutting-edge AI algorithms to translate complex battlefield management system inputs into actionable tasks for autonomous vehicles, ensuring precise mission execution and tactical superiority.",
     },
@@ -47,6 +49,7 @@ function App() {
       description:
         "Convert autonomous platforms to be compatible with higher level tasks, enabling tactical maneuvering and coordinated actions.",
       icon: <Robot className="w-12 h-12 text-tactview-gold" />,
+      demo: "/assets/integrate.mp4",
       details:
         "TactIntegrate transforms basic autonomous platforms into sophisticated tactical units capable of executing complex maneuvers and coordinated operations in challenging battlefield environments.",
     },
@@ -55,10 +58,18 @@ function App() {
       description:
         "Integration and development of simulation products for operator and AI system training.",
       icon: <Box className="w-12 h-12 text-tactview-gold" />,
-      demo: "https://placehold.co/600x400.gif",
+      demo: "/assets/sim.mp4",
       details:
         "TactSim provides comprehensive simulation environments for training both human operators and AI systems, ensuring optimal performance in real-world combat scenarios.",
     },
+  };
+
+  const handleVideoClick = (videoSrc: string) => {
+    setExpandedVideo(videoSrc);
+  };
+
+  const closeExpandedVideo = () => {
+    setExpandedVideo(null);
   };
 
   const renderContent = () => {
@@ -74,10 +85,13 @@ function App() {
               vehicles and unmanned aerial vehicles, making the forward line of
               robotics more efficient than ever before.
             </p>
-            <img
-              src="https://placehold.co/1200x600.gif"
-              alt="TactView Demo"
-              className="rounded-lg shadow-2xl"
+            <video
+              src="/assets/main.mp4"
+              autoPlay
+              loop
+              muted
+              className="rounded-lg shadow-2xl w-[1200px] max-w-full cursor-pointer"
+              onClick={() => handleVideoClick("/assets/main.mp4")}
             />
           </div>
         );
@@ -106,10 +120,13 @@ function App() {
                     <h3 className="text-2xl font-semibold mb-4 text-tactview-gold">
                       Demo
                     </h3>
-                    <img
+                    <video
                       src={product.demo}
-                      alt={`${product.title} Demo`}
-                      className="rounded-lg w-full"
+                      autoPlay
+                      loop
+                      muted
+                      className="rounded-lg w-[1200px] max-w-full cursor-pointer"
+                      onClick={() => handleVideoClick(product.demo!)}
                     />
                   </div>
                 )}
@@ -131,10 +148,16 @@ function App() {
                 </h3>
                 <p className="mb-4">{product.description}</p>
                 {product.demo && (
-                  <img
+                  <video
                     src={product.demo}
-                    alt={`${product.title} Demo`}
-                    className="rounded-lg w-full"
+                    autoPlay
+                    loop
+                    muted
+                    className="rounded-lg w-full cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleVideoClick(product.demo!);
+                    }}
                   />
                 )}
               </button>
@@ -168,12 +191,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-tactview-dark relative">
-      <div className="flex justify-center p-4">
+      <div className="flex justify-center p-8">
         <img src="/tactview.png" alt="TactView Logo" className="h-40" />
       </div>
 
-      <div className="flex flex-col items-center mt-4 mb-12">
-        <div className="flex items-center space-x-8">
+      <div className="flex flex-col items-center mt-20 mb-12">
+        <div className="flex items-center space-x-24">
           <button
             className={`nav-item ${
               activeSection === "home" ? "text-tactview-gold" : ""
@@ -232,8 +255,32 @@ function App() {
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-12">{renderContent()}</main>
+      <main className="container mx-auto px-4">{renderContent()}</main>
 
+      {expandedVideo && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          onClick={closeExpandedVideo}
+        >
+          <div className="relative w-[90vw] h-[90vh] flex items-center justify-center">
+            <button
+              onClick={closeExpandedVideo}
+              className="absolute top-4 right-4 text-white hover:text-tactview-gold z-10"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <video
+              src={expandedVideo}
+              autoPlay
+              loop
+              muted
+              className="max-w-full max-h-full rounded-lg"
+              controls
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
