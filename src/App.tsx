@@ -3,6 +3,7 @@ import { ChevronDown, Bone as Drone, Notebook as Robot, Target, Box, Mail } from
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [selectedProduct, setSelectedProduct] = useState('');
   const [isProductsOpen, setIsProductsOpen] = useState(false);
 
   const products = {
@@ -11,23 +12,27 @@ function App() {
       description: 'Tactical control of UAVs and UGVs. Integration with vehicles, their autonomy, BMSs and operator controls.',
       icon: <Drone className="w-12 h-12 text-tactview-gold" />,
       demo: 'https://placehold.co/600x400.gif',
+      details: 'TactView provides seamless integration between unmanned vehicles and battlefield management systems, enabling efficient tactical control and coordination of multiple autonomous units in real-time combat scenarios.',
     },
     tactexecute: {
       title: 'TactExecute',
       description: 'Mission autonomy execution package. Converting BMS and operator input to tasks for each vehicle using advanced AI algorithms.',
       icon: <Target className="w-12 h-12 text-tactview-gold" />,
       demo: 'https://placehold.co/600x400.gif',
+      details: 'TactExecute leverages cutting-edge AI algorithms to translate complex battlefield management system inputs into actionable tasks for autonomous vehicles, ensuring precise mission execution and tactical superiority.',
     },
     tactintegrate: {
       title: 'TactIntegrate',
       description: 'Convert autonomous platforms to be compatible with higher level tasks, enabling tactical maneuvering and coordinated actions.',
       icon: <Robot className="w-12 h-12 text-tactview-gold" />,
+      details: 'TactIntegrate transforms basic autonomous platforms into sophisticated tactical units capable of executing complex maneuvers and coordinated operations in challenging battlefield environments.',
     },
     tactsim: {
       title: 'TactSim',
       description: 'Integration and development of simulation products for operator and AI system training.',
       icon: <Box className="w-12 h-12 text-tactview-gold" />,
       demo: 'https://placehold.co/600x400.gif',
+      details: 'TactSim provides comprehensive simulation environments for training both human operators and AI systems, ensuring optimal performance in real-world combat scenarios.',
     },
   };
 
@@ -46,10 +51,42 @@ function App() {
         );
 
       case 'products':
+        if (selectedProduct && products[selectedProduct]) {
+          const product = products[selectedProduct];
+          return (
+            <div className="max-w-4xl mx-auto">
+              <div className="product-card">
+                <div className="flex items-center mb-6">
+                  {product.icon}
+                  <h2 className="text-3xl font-bold ml-4 golden-gradient">{product.title}</h2>
+                </div>
+                
+                <p className="text-xl mb-6">{product.description}</p>
+                
+                <div className="mb-8">
+                  <h3 className="text-2xl font-semibold mb-4 text-tactview-gold">Overview</h3>
+                  <p className="text-lg">{product.details}</p>
+                </div>
+
+                {product.demo && (
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-4 text-tactview-gold">Demo</h3>
+                    <img src={product.demo} alt={`${product.title} Demo`} className="rounded-lg w-full" />
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        }
+        
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {Object.entries(products).map(([key, product]) => (
-              <div key={key} className="product-card">
+              <button
+                key={key}
+                className="product-card text-left hover:scale-105 transition-transform duration-300"
+                onClick={() => setSelectedProduct(key)}
+              >
                 <div className="flex items-center mb-4">
                   {product.icon}
                   <h3 className="text-2xl font-bold ml-4 golden-gradient">{product.title}</h3>
@@ -58,7 +95,7 @@ function App() {
                 {product.demo && (
                   <img src={product.demo} alt={`${product.title} Demo`} className="rounded-lg w-full" />
                 )}
-              </div>
+              </button>
             ))}
           </div>
         );
@@ -94,7 +131,10 @@ function App() {
         <div className="flex items-center space-x-8">
           <button
             className={`nav-item ${activeSection === 'home' ? 'text-tactview-gold' : ''}`}
-            onClick={() => setActiveSection('home')}
+            onClick={() => {
+              setActiveSection('home');
+              setSelectedProduct('');
+            }}
           >
             Home
           </button>
@@ -102,7 +142,11 @@ function App() {
           <div className="relative">
             <button
               className={`nav-item flex items-center ${activeSection === 'products' ? 'text-tactview-gold' : ''}`}
-              onClick={() => setIsProductsOpen(!isProductsOpen)}
+              onClick={() => {
+                setActiveSection('products');
+                setSelectedProduct('');
+                setIsProductsOpen(!isProductsOpen);
+              }}
             >
               Products
               <ChevronDown className="ml-1 w-4 h-4" />
@@ -115,7 +159,7 @@ function App() {
                     key={key}
                     className="w-full text-left px-4 py-2 hover:text-tactview-gold transition-colors duration-200"
                     onClick={() => {
-                      setActiveSection('products');
+                      setSelectedProduct(key);
                       setIsProductsOpen(false);
                     }}
                   >
@@ -128,7 +172,10 @@ function App() {
           
           <button
             className={`nav-item ${activeSection === 'contact' ? 'text-tactview-gold' : ''}`}
-            onClick={() => setActiveSection('contact')}
+            onClick={() => {
+              setActiveSection('contact');
+              setSelectedProduct('');
+            }}
           >
             Get in Touch
           </button>
